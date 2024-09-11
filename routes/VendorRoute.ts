@@ -1,8 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
 import {
   AddFood,
+  GetCurrentOrders,
   GetFoods,
+  GetOrderDetails,
   GetVendorProfile,
+  ProcessOrder,
   UpdateVendorCoverImage,
   UpdateVendorProfile,
   UpdateVendorService,
@@ -24,17 +27,19 @@ const imageStorage = multer.diskStorage({
 
 const images = multer({ storage: imageStorage }).array("images", 10);
 
-
-
 router.post("/login", VendorLogin);
 
 router.use(Authenticate);
 router.get("/profile", GetVendorProfile);
 router.patch("/profile", UpdateVendorProfile);
-router.patch("/coverimage",images, UpdateVendorCoverImage);
+router.patch("/coverimage", images, UpdateVendorCoverImage);
 router.patch("/service", UpdateVendorService);
 
 router.post("/food", images, AddFood);
 router.get("/foods", GetFoods);
+
+router.get("/orders", GetCurrentOrders);
+router.put("/order/:id/process", ProcessOrder);
+router.get("/order/:id", GetOrderDetails);
 
 export { router as VendorRoute };
