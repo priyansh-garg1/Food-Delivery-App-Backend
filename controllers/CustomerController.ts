@@ -250,13 +250,13 @@ export const EditCustomerProfile = async (
 
 const validateTransaction = async(txnId: string) => {
     
-  const currentTransaction = await Transaction.findById(txnId);
+  const currentTransaction = {"a":"a"}
 
-  if(currentTransaction){
-      if(currentTransaction.status.toLowerCase() !== 'failed'){
-          return {status: true, currentTransaction};
-      }
-  }
+  // if(currentTransaction){
+  //     if(currentTransaction.status.toLowerCase() !== 'failed'){
+  //         return {status: true, currentTransaction};
+  //     }
+  // }
   return {status: false, currentTransaction};
 }
 
@@ -321,15 +321,15 @@ export const CreateOrder = async (req: Request, res: Response, next: NextFunctio
           profile?.orders.push(currentOrder);
 
 
-          currentTransaction.vendorId = vendorId;
-          currentTransaction.orderId = orderId;
-          currentTransaction.status = 'CONFIRMED'
+          // currentTransaction.vendorId = vendorId;
+          // currentTransaction.orderId = orderId;
+          // currentTransaction.status = 'CONFIRMED'
           
-          await currentTransaction.save();
+          // await currentTransaction.save();
 
-          await assignOrderForDelivery(currentOrder._id, vendorId);
+          // await assignOrderForDelivery(currentOrder._id, vendorId);
 
-          const profileResponse =  await profile.save();
+          // const profileResponse =  await profile.save();
 
           return res.status(200).json(profileResponse );
 
