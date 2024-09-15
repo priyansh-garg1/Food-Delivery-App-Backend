@@ -80,6 +80,8 @@ export const ReasturantById = async (
   res: Response,
   next: NextFunction
 ) => {
+
+  // const { id } = req.params;
   const id = req.params.id;
 
   const result = await Vendor.findById(id).populate("foods");
